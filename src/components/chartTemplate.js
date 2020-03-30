@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { CXContext } from "./cxContext";
 import * as dc from "dc";
 import { css } from "glamor";
-import { Header, Label } from "semantic-ui-react";
+import { Header, Label, Icon, Popup } from "semantic-ui-react";
 
 const ResetButton = props => {
     const style = css({
@@ -44,8 +44,10 @@ export const ChartTemplate = props => {
     }, [props.params]);
 
     let button;
+    let label;
     if (props.reset) {
         button = <ResetButton chart={chart} />;
+        label= <Popup content="Pick province(s) to filter results and click Reset to restore defaults" trigger={<Label circular color='teal'>?</Label>}/>
     }
     let header;
     if (props.title) {
@@ -53,9 +55,11 @@ export const ChartTemplate = props => {
             <Header as="h3">
                 {props.title}
                 {button}
+                {label}
             </Header>
         );
     }
+
     return (
         <Fragment>
             {header}

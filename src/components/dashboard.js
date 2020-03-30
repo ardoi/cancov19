@@ -72,8 +72,8 @@ export const Dashboard = props => {
                 <Grid.Column width={4}>
                     {/* <Checkbox toggle label="Normalize to population"></Checkbox> */}
                     <Grid>
-                        <GridRow centered>
-                            <Grid.Column width={8}>
+                        <GridRow centered columns={3}>
+                            <Grid.Column width={5}>
                                 <Statistic size="small">
                                     <StatisticValue>
                                         <StatNumber
@@ -86,7 +86,7 @@ export const Dashboard = props => {
                                     <StatisticLabel>Total cases</StatisticLabel>
                                 </Statistic>
                             </Grid.Column>
-                            <Grid.Column width={8}>
+                            <Grid.Column width={5}>
                                 <Statistic size="small">
                                     <StatisticValue>
                                         <StatNumber
@@ -184,8 +184,8 @@ export const Dashboard = props => {
             <AgeChart/> */}
                 <Grid.Column width={4}>
                     <Grid>
-                        <GridRow centered>
-                            <Grid.Column width={8}>
+                        <GridRow centered columns={3}>
+                            <Grid.Column width={5}>
                                 <Statistic size="small">
                                     <StatisticValue>
                                         <StatNumber
@@ -200,7 +200,7 @@ export const Dashboard = props => {
                                     </StatisticLabel>
                                 </Statistic>
                             </Grid.Column>
-                            <Grid.Column width={8}>
+                            <Grid.Column width={5}>
                                 <Statistic size="small">
                                     <StatisticValue>
                                         <StatNumber
