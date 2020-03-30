@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/cancov19/static/css/main.75957206.chunk.css",
+    "main.js": "/cancov19/static/js/main.e5aaf524.chunk.js",
+    "main.js.map": "/cancov19/static/js/main.e5aaf524.chunk.js.map",
+    "runtime-main.js": "/cancov19/static/js/runtime-main.282c0c0b.js",
+    "runtime-main.js.map": "/cancov19/static/js/runtime-main.282c0c0b.js.map",
+    "static/css/2.19499655.chunk.css": "/cancov19/static/css/2.19499655.chunk.css",
+    "static/js/2.3145a0f5.chunk.js": "/cancov19/static/js/2.3145a0f5.chunk.js",
+    "static/js/2.3145a0f5.chunk.js.map": "/cancov19/static/js/2.3145a0f5.chunk.js.map",
+    "index.html": "/cancov19/index.html",
+    "precache-manifest.4e265a90d5c24f257fd725436f2ce520.js": "/cancov19/precache-manifest.4e265a90d5c24f257fd725436f2ce520.js",
+    "service-worker.js": "/cancov19/service-worker.js",
+    "static/css/2.19499655.chunk.css.map": "/cancov19/static/css/2.19499655.chunk.css.map",
+    "static/css/main.75957206.chunk.css.map": "/cancov19/static/css/main.75957206.chunk.css.map",
+    "static/js/2.3145a0f5.chunk.js.LICENSE.txt": "/cancov19/static/js/2.3145a0f5.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/cancov19/static/media/outline-icons.ef60a4f6.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.282c0c0b.js",
+    "static/css/2.19499655.chunk.css",
+    "static/js/2.3145a0f5.chunk.js",
+    "static/css/main.75957206.chunk.css",
+    "static/js/main.e5aaf524.chunk.js"
+  ]
+}
