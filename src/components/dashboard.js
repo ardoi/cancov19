@@ -196,7 +196,7 @@ export const Dashboard = props => {
                                         />
                                     </StatisticValue>
                                     <StatisticLabel>
-                                        Total deaths
+                                        Total casualties
                                     </StatisticLabel>
                                 </Statistic>
                             </Grid.Column>
@@ -211,7 +211,7 @@ export const Dashboard = props => {
                                             }}
                                         />
                                     </StatisticValue>
-                                    <StatisticLabel>New deaths</StatisticLabel>
+                                    <StatisticLabel>New casualties</StatisticLabel>
                                     <StatisticLabel>
                                         On{" "}
                                         <LastDateDisplay
@@ -279,7 +279,7 @@ export const Dashboard = props => {
         <Grid>
             <GridRow centered>
                 {/* <Grid.Column width={10}> */}
-                <Header as="h2">DEATHS PER 1M</Header>
+                <Header as="h2">CASUALTIES PER 1M</Header>
                 {/* </Grid.Column> */}
             </GridRow>
             <Grid.Row centered columns={5}>
@@ -310,7 +310,7 @@ export const Dashboard = props => {
             )
         },
         {
-            menuItem: "Deaths",
+            menuItem: "Casualties",
             pane: (
                 <Tab.Pane attached="top" key={2}>
                     {deaths}
@@ -318,7 +318,7 @@ export const Dashboard = props => {
             )
         },
         {
-            menuItem: "Normalized - cases",
+            menuItem: "Cases per M",
             pane: (
                 <Tab.Pane attached="top" key={3}>
                     {normalized}
@@ -326,9 +326,9 @@ export const Dashboard = props => {
             )
         },
         {
-            menuItem: "Normalized - deaths",
+            menuItem: "Casualties per M",
             pane: (
-                <Tab.Pane attached="top" key={3}>
+                <Tab.Pane attached="top" key={4}>
                     {normalizedd}
                 </Tab.Pane>
             )
