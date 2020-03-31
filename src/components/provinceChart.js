@@ -3,7 +3,7 @@ import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
 import { colorf, sortpc, population } from "../util";
 
-const provinceChartFunc = (divRef, cf, params) => {
+const provinceChartFunc = (divRef, cf, params, windowSize) => {
     const dimension = cf.dimension(d => d.Prov);
     const group = dimension.group();
 
@@ -12,9 +12,16 @@ const provinceChartFunc = (divRef, cf, params) => {
     sortpc(provinces, colors);
     const provinceChart = dc.rowChart(divRef);
     const normalize = params.normalize;
+    let chartH = 300
+    let chartW = 350
+    
+    if(windowSize.width<1440){
+        chartW = windowSize.width/1440 * chartW;
+        chartH = windowSize.width/1440 * chartH;
+    }
     provinceChart
-        .width(350)
-        .height(300)
+        .width(chartW)
+        .height(chartH)
         .margins({ top: 10, right: 50, bottom: 30, left: 40 })
         .dimension(dimension)
         .group(group)

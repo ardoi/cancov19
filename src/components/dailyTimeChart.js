@@ -5,7 +5,7 @@ import { scaleTime } from "d3";
 import moment from "moment";
 import { colorf, sortpc } from "../util";
 
-const dailyTimeChartFunc = (divRef, cf, params) => {
+const dailyTimeChartFunc = (divRef, cf, params, windowSize) => {
     const dimension = cf.dimension(d => d.Date);
     const group = dimension.group();
     const stack = params.stacked;
@@ -43,14 +43,21 @@ const dailyTimeChartFunc = (divRef, cf, params) => {
     } else {
         timeChart.dimension(dimension).group(chartGroup);
     }
+    let chartH = 350
+    let chartW = 475
+    
+    if(windowSize.width<1440){
+        chartW = windowSize.width/1440 * chartW;
+        chartH = windowSize.width/1440 * chartH;
+    }
     timeChart
         .renderArea(true)
         .elasticY(true)
-        .width(475)
-        .height(350)
+        .width(chartW)
+        .height(chartH)
         .brushOn(false)
         .clipPadding(10)
-        .margins({ left: 50, top: 10, right: 10, bottom: 20 })
+        .margins({ left: 40, top: 10, right: 10, bottom: 20 })
         .renderDataPoints({ radius: 2, fillOpacity: 1 })
         .ordinalColors(colors)
         .x(scaleTime().domain([new Date(2020, 2, 1), moment().add(1, "day")]))

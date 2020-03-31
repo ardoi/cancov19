@@ -3,6 +3,7 @@ import { CXContext } from "./cxContext";
 import * as dc from "dc";
 import { css } from "glamor";
 import { Header, Label, Icon, Popup } from "semantic-ui-react";
+import { useWindowDimensions} from "../util";
 
 const ResetButton = props => {
     const style = css({
@@ -36,8 +37,9 @@ export const ChartTemplate = props => {
         }
     }
     const div = React.useRef(null);
+    const windowSize = useWindowDimensions()
     React.useEffect(() => {
-        const newChart = props.chartFunction(div.current, cf, props.params);
+        const newChart = props.chartFunction(div.current, cf, props.params, windowSize);
 
         newChart.render();
         updateChart(newChart);

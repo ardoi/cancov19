@@ -1,4 +1,5 @@
 import { rgb } from "d3-color";
+import { useState, useEffect } from 'react';
 
 export const colorf = () => {
     //http://tsitsul.in/blog/coloropt/
@@ -52,3 +53,27 @@ export const population = {
     NT: 0.044,
     NU: 0.039
 };
+
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+export function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+}
