@@ -72,9 +72,9 @@ export const Dashboard = props => {
                 <Grid.Column width={4}>
                     {/* <Checkbox toggle label="Normalize to population"></Checkbox> */}
                     <Grid>
-                        <GridRow centered columns={3}>
-                            <Grid.Column width={5}>
-                                <Statistic size="small">
+                        <GridRow centered columns={1}>
+                            <Grid.Column width={6}>
+                                <Statistic centered size="small">
                                     <StatisticValue>
                                         <StatNumber
                                             params={{
@@ -86,7 +86,7 @@ export const Dashboard = props => {
                                     <StatisticLabel>Total cases</StatisticLabel>
                                 </Statistic>
                             </Grid.Column>
-                            <Grid.Column width={5}>
+                            <Grid.Column width={6}>
                                 <Statistic size="small">
                                     <StatisticValue>
                                         <StatNumber
@@ -185,7 +185,7 @@ export const Dashboard = props => {
                 <Grid.Column width={4}>
                     <Grid>
                         <GridRow centered columns={3}>
-                            <Grid.Column width={5}>
+                            <Grid.Column width={6}>
                                 <Statistic size="small">
                                     <StatisticValue>
                                         <StatNumber
@@ -200,7 +200,7 @@ export const Dashboard = props => {
                                     </StatisticLabel>
                                 </Statistic>
                             </Grid.Column>
-                            <Grid.Column width={5}>
+                            <Grid.Column width={6}>
                                 <Statistic size="small">
                                     <StatisticValue>
                                         <StatNumber
