@@ -43,7 +43,6 @@ export default class DataContext extends Component {
         };
 
         const processDeathData = data => {
-            console.log(data);
             data.forEach(d => {
                 d.Date = moment(d["Announced\n"] + "-2020", dateFormat);
             });
@@ -84,7 +83,7 @@ export default class DataContext extends Component {
             });
 
         Promise.all([p1, p2]).then(x => {
-            console.log("all done", x);
+            console.log("Done fetching data");
             this.setState({
                 loading: false,
                 hasCF: true,

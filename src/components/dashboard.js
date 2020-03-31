@@ -318,7 +318,7 @@ export const Dashboard = props => {
             )
         },
         {
-            menuItem: "Cases per M",
+            menuItem: "Cases per million",
             pane: (
                 <Tab.Pane attached="top" key={3}>
                     {normalized}
@@ -326,7 +326,7 @@ export const Dashboard = props => {
             )
         },
         {
-            menuItem: "Casualties per M",
+            menuItem: "Casualties per million",
             pane: (
                 <Tab.Pane attached="top" key={4}>
                     {normalizedd}
