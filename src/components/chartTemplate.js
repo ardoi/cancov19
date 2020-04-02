@@ -24,26 +24,21 @@ const ResetButton = props => {
 export const ChartTemplate = props => {
     const context = React.useContext(CXContext);
     const [chart, updateChart] = React.useState(null);
-    let cf;
+    const [chartData, updateChartData] = React.useState({'a':1, 'b':0});
+    let dims;
     if (props.params.usedata === "detail") {
-        cf = context.cf;
-        if (props.params.normalize) {
-            cf = context.cfn;
-        }
+        dims = context.dimensions;
     } else if (props.params.usedata === "deaths") {
-        cf = context.cfd;
-        if (props.params.normalize) {
-            cf = context.cfdn;
-        }
+        dims = context.dimensionsD;
     }
     const div = React.useRef(null);
     const windowSize = useWindowDimensions()
     React.useEffect(() => {
-        const newChart = props.chartFunction(div.current, cf, props.params, windowSize);
+        const newChart = props.chartFunction(div.current, dims, props.params, windowSize, chartData, updateChartData);
 
         newChart.render();
         updateChart(newChart);
-    }, [props.params]);
+    }, [props.params, windowSize]);
 
     let button;
     let label;

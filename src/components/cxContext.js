@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import "dc/dist/style/dc.css";
 import { csv } from "d3-fetch";
 import moment from "moment";
-import * as crossfilter from "crossfilter";
+import crossfilter from "crossfilter2";
 export const CXContext = React.createContext("CXContext");
 
 export default class DataContext extends Component {
     state = {
         detailData: null,
         deathData: null,
+        dim:null,
         loading: false,
         hasCF: false
     };
@@ -19,6 +20,8 @@ export default class DataContext extends Component {
         if (this.state.loading) {
             return;
         }
+        this.dimensions = {};
+        this.dimensionsD = {};
         const dateFormat = "D-MMM-YYYY";
         const urlBase =
             "https://docs.google.com/spreadsheets/d/1C59nxtgcnwGyo6lgypsgN18duxmwWigjeVdKY58t0mU/gviz/tq?tqx=out:csv&sheet=";
@@ -33,12 +36,17 @@ export default class DataContext extends Component {
                 d.Date = moment(d.Date + "-2020", dateFormat);
             });
             data = data.filter(x => x.Prov !== "RC");
-            this.cf = crossfilter(data);
+            const cf = crossfilter(data);
             const clonedData = JSON.parse(JSON.stringify(data));
             clonedData.forEach(x => {
                 x.Date = moment(x.Date);
             });
-            this.cfn = crossfilter(clonedData);
+            const cfn = crossfilter(clonedData);
+
+            this.dimensions['date'] = cf.dimension(d => d.Date);
+            this.dimensions['dateN'] = cfn.dimension(d => d.Date);
+            this.dimensions['prov'] = cf.dimension(d => d.Prov);
+            this.dimensions['provN'] = cfn.dimension(d => d.Prov);
             return data;
         };
 
@@ -47,12 +55,16 @@ export default class DataContext extends Component {
                 d.Date = moment(d["Announced\n"] + "-2020", dateFormat);
             });
             data = data.filter(x => x.Prov !== "RC");
-            this.cfd = crossfilter(data);
+            const cfd = crossfilter(data);
             const clonedData = JSON.parse(JSON.stringify(data));
             clonedData.forEach(x => {
                 x.Date = moment(x.Date);
             });
-            this.cfdn = crossfilter(clonedData);
+            const cfdn = crossfilter(clonedData);
+            this.dimensionsD['date'] = cfd.dimension(d => d.Date);
+            this.dimensionsD['dateN'] = cfdn.dimension(d => d.Date);
+            this.dimensionsD['prov'] = cfd.dimension(d => d.Prov);
+            this.dimensionsD['provN'] = cfdn.dimension(d => d.Prov);
             return data;
         };
         //backup URL's in case there are CORS errors
@@ -99,10 +111,12 @@ export default class DataContext extends Component {
         return (
             <CXContext.Provider
                 value={{
-                    cf: this.cf,
-                    cfd: this.cfd,
-                    cfn: this.cfn,
-                    cfdn: this.cfdn
+                    // cf: this.cf,
+                    // cfd: this.cfd,
+                    // cfn: this.cfn,
+                    // cfdn: this.cfdn
+                    dimensions: this.dimensions,
+                    dimensionsD: this.dimensionsD,
                 }}
             >
                 <div ref={this.parent}>{this.props.children}</div>

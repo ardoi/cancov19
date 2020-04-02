@@ -5,8 +5,29 @@ import { scaleTime } from "d3";
 import moment from "moment";
 import { colorf, sortpc, population } from "../util";
 
-const timeChartFunc = (divRef, cf, params, windowSize) => {
-    const dimension = cf.dimension(d => d.Date);
+const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, updateChartData) => {
+    const chartH0 = 350;
+    const chartW0 = 475;
+
+    if (chartData.hasOwnProperty("chart")) {
+        const chart = chartData.chart;
+
+        const chartW = (windowSize.width / 1440) * chartW0;
+        const chartH = (windowSize.width / 1440) * chartH0;
+
+        chart.width(chartW).height(chartH);
+        return chart;
+    } else {
+    let dimension;
+    let pdim;
+    if(params.normalize){
+        dimension = dimensions['dateN'];
+        pdim = dimensions['provN'];
+    }
+    else{
+        dimension = dimensions['date'];
+        pdim = dimensions['prov'];
+    }
     const group = dimension.group();
     let chartGroup = group;
     const colors = colorf();
@@ -39,7 +60,6 @@ const timeChartFunc = (divRef, cf, params, windowSize) => {
     }
     const ag = accumulate_group(pCounts);
     chartGroup = ag;
-    const pdim = cf.dimension(d => d.Prov);
     const provinces = pdim.group().all();
     //sort provinces and colors together
     sortpc(provinces, colors);
@@ -66,14 +86,9 @@ const timeChartFunc = (divRef, cf, params, windowSize) => {
             // .renderDataPoints({ radius: 2, fillOpacity: 1 })
         );
     });
-
-    let chartH = 350
-    let chartW = 475
     
-    if(windowSize.width<1440){
-        chartW = windowSize.width/1440 * chartW;
-        chartH = windowSize.width/1440 * chartH;
-    }
+    const    chartW = windowSize.width/1440 * chartW0;
+    const    chartH = windowSize.width/1440 * chartH0;
     timeChart
         // .renderArea(true)
         .elasticY(true)
@@ -90,7 +105,9 @@ const timeChartFunc = (divRef, cf, params, windowSize) => {
         .ticks(5)
         .tickFormat(v => moment(v).format("DD/MM"));
 
+    updateChartData({ 'chart': timeChart });
     return timeChart;
+}
 };
 
 export const NormalizedChart = props => {
