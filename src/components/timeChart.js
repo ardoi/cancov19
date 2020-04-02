@@ -137,7 +137,7 @@ const timeChartFunc = (
                 timeChart.stack(chartGroup, pk, sel(pk));
             }
         }
-        console.log('update', updateChartData)
+        // console.log('update', updateChartData)
         updateChartData({ 'chart': timeChart });
         return timeChart;
     }

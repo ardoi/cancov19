@@ -27,8 +27,6 @@ export default class DataContext extends Component {
             "https://docs.google.com/spreadsheets/d/1C59nxtgcnwGyo6lgypsgN18duxmwWigjeVdKY58t0mU/gviz/tq?tqx=out:csv&sheet=";
         const url = urlBase + "DT&range=C:G";
         const url2g = urlBase + "Dth&range=B:F";
-        const url2 =
-            "https://docs.googe.com/spreadsheets/d/1C59nxtgcnwGyo6lgypsgN18duxmwWigjeVdKY58t0mU/gviz/tq?tqx=out:csv&sheet=";
         this.setState({ loading: true });
 
         const processDetailData = data => {
