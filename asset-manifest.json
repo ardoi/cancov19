@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/cancov19/static/css/main.75957206.chunk.css",
-    "main.js": "/cancov19/static/js/main.e660b76e.chunk.js",
-    "main.js.map": "/cancov19/static/js/main.e660b76e.chunk.js.map",
+    "main.js": "/cancov19/static/js/main.0973a20c.chunk.js",
+    "main.js.map": "/cancov19/static/js/main.0973a20c.chunk.js.map",
     "runtime-main.js": "/cancov19/static/js/runtime-main.282c0c0b.js",
     "runtime-main.js.map": "/cancov19/static/js/runtime-main.282c0c0b.js.map",
     "static/css/2.19499655.chunk.css": "/cancov19/static/css/2.19499655.chunk.css",
     "static/js/2.fab032fc.chunk.js": "/cancov19/static/js/2.fab032fc.chunk.js",
     "static/js/2.fab032fc.chunk.js.map": "/cancov19/static/js/2.fab032fc.chunk.js.map",
     "index.html": "/cancov19/index.html",
-    "precache-manifest.90376f805d5d86b933c28b9e83fa9267.js": "/cancov19/precache-manifest.90376f805d5d86b933c28b9e83fa9267.js",
+    "precache-manifest.87adfe656a443751ca546ad69536ab0b.js": "/cancov19/precache-manifest.87adfe656a443751ca546ad69536ab0b.js",
     "service-worker.js": "/cancov19/service-worker.js",
     "static/css/2.19499655.chunk.css.map": "/cancov19/static/css/2.19499655.chunk.css.map",
     "static/css/main.75957206.chunk.css.map": "/cancov19/static/css/main.75957206.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.19499655.chunk.css",
     "static/js/2.fab032fc.chunk.js",
     "static/css/main.75957206.chunk.css",
-    "static/js/main.e660b76e.chunk.js"
+    "static/js/main.0973a20c.chunk.js"
   ]
 }
