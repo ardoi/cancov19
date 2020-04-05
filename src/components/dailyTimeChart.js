@@ -3,7 +3,7 @@ import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
 import { scaleTime } from "d3";
 import moment from "moment";
-import { colorf, sortpc } from "../util";
+import { colorf, sortpc, totalReduce, provinceTotalReduce } from "../util";
 
 const dailyTimeChartFunc = (
     divRef,
@@ -34,30 +34,23 @@ const dailyTimeChartFunc = (
             dimension = dimensions["date"];
             pdim = dimensions["prov"];
         }
-        // const dimension = cf.dimension(d => d.Date);
         const group = dimension.group();
         const stack = params.stacked;
         let chartGroup = group;
+        const provincesG = totalReduce(pdim.group());
         if (stack) {
-            const pCounts = group.reduce(
-                (p, v) => {
-                    p[v.Prov] = (p[v.Prov] || 0) + 1;
-                    return p;
-                },
-                (p, v) => {
-                    p[v.Prov] = (p[v.Prov] || 0) - 1;
-                    return p;
-                },
-                () => ({})
-            );
+            const pCounts = provinceTotalReduce(group);
             chartGroup = pCounts;
         }
-        const provinces = pdim.group().all();
+        else{
+            chartGroup = totalReduce(group);
+        }
         const sel = i => {
             return d => d.value[i] || 0;
         };
 
         const colors = colorf();
+        const provinces = provincesG.all();
         sortpc(provinces, colors);
 
         const timeChart = dc.lineChart(divRef);

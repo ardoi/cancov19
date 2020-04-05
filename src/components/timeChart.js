@@ -3,7 +3,7 @@ import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
 import { scaleTime } from "d3";
 import moment from "moment";
-import { colorf, sortpc } from "../util";
+import { colorf, sortpc, totalReduce, provinceTotalReduce } from "../util";
 
 const timeChartFunc = (
     divRef,
@@ -42,17 +42,7 @@ const timeChartFunc = (
         let chartGroup = group;
         const colors = colorf();
         if (stack) {
-            const pCounts = group.reduce(
-                (p, v) => {
-                    p[v.Prov] = (p[v.Prov] || 0) + 1;
-                    return p;
-                },
-                (p, v) => {
-                    p[v.Prov] = p[v.Prov] - 1;
-                    return p;
-                },
-                () => ({})
-            );
+            const pCounts = provinceTotalReduce(group);
             function accumulate_group(source_group) {
                 return {
                     all: function() {
@@ -86,10 +76,10 @@ const timeChartFunc = (
                     }
                 };
             }
-            chartGroup = accumulate_group(group);
+            const tCount = totalReduce(group);
+            chartGroup = accumulate_group(tCount);
         }
-        // const provinces = pdim.group().all();
-        const provinces = pgroup.all();
+        const provinces = totalReduce(pgroup).all();
         //sort provinces and colors together
         sortpc(provinces, colors);
         const smallestProvince = provinces[0].key;

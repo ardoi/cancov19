@@ -77,3 +77,31 @@ export function useWindowDimensions() {
 
   return windowDimensions;
 }
+
+export function totalReduce(group){
+    const res = group.reduce(
+            (p, v) => {
+                return p + v.Total;
+            },
+            (p, v) => {
+                return p - v.Total;
+            },
+            () => 0
+        );
+    return res;
+}
+
+export function provinceTotalReduce(group){
+    const pCounts = group.reduce(
+        (p, v) => {
+            p[v.Prov] = (p[v.Prov] || 0) + v.Total;
+            return p;
+        },
+        (p, v) => {
+            p[v.Prov] = p[v.Prov] - v.Total;
+            return p;
+        },
+        () => ({})
+    );
+    return pCounts;
+}

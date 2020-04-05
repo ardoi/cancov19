@@ -33,11 +33,11 @@ const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, update
     const colors = colorf();
     const pCounts = group.reduce(
         (p, v) => {
-            p[v.Prov] = (p[v.Prov] || 0) + 1 / population[v.Prov];
+            p[v.Prov] = (p[v.Prov] || 0) + v.Total / population[v.Prov];
             return p;
         },
         (p, v) => {
-            p[v.Prov] = p[v.Prov] - 1 / population[v.Prov];
+            p[v.Prov] = p[v.Prov] - v.Total / population[v.Prov];
             return p;
         },
         () => ({})

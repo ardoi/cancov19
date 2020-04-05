@@ -1,7 +1,7 @@
 import React from "react";
 import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
-import { colorf, sortpc, population } from "../util";
+import { colorf, sortpc, population, totalReduce} from "../util";
 
 const provinceChartFunc = (
     divRef,
@@ -11,8 +11,8 @@ const provinceChartFunc = (
     chartData,
     updateChartData
 ) => {
-    const chartW0 = 350
-    const chartH0 = 300
+    const chartW0 = 350;
+    const chartH0 = 300;
     if (chartData.hasOwnProperty("chart")) {
         const chart = chartData.chart;
 
@@ -29,7 +29,7 @@ const provinceChartFunc = (
         }
         const group = dimension.group();
         const colors = colorf();
-        const provinces = group.all();
+        const provinces = totalReduce(group).all()
         sortpc(provinces, colors);
         const provinceChart = dc.rowChart(divRef);
         const normalize = params.normalize;

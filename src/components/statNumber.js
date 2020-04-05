@@ -1,16 +1,17 @@
 import React from "react";
 import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
+import { colorf, sortpc, totalReduce, provinceTotalReduce } from "../util";
 
 const statNumberFunc = (divRef, dimensions, params) => {
     const dimension = dimensions["date"];
     let group;
     let getValue;
     if (params.total) {
-        group = dimension.groupAll();
+        group = dimension.groupAll().reduceSum(x=>x.Total);
         getValue = x => x;
     } else {
-        group = dimension.group();
+        group = totalReduce(dimension.group());
         getValue = x => x.value;
     }
     const quarterChart = dc.numberDisplay(divRef);
