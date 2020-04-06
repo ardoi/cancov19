@@ -25,8 +25,8 @@ export default class DataContext extends Component {
         const dateFormat = "D-MMM-YYYY";
         const urlBase =
             "https://docs.google.com/spreadsheets/d/1C59nxtgcnwGyo6lgypsgN18duxmwWigjeVdKY58t0mU/gviz/tq?tqx=out:csv&sheet=";
-        const url = urlBase + "Det&range=A:D";
-        const url2g = urlBase + "Dth&range=A:F";
+        const url = urlBase + "Det";
+        const url2g = urlBase + "Dth";
         this.setState({ loading: true });
 
         const processDetailData = data => {
