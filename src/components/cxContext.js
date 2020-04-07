@@ -32,7 +32,7 @@ export default class DataContext extends Component {
         const processDetailData = data => {
             data.forEach(d => {
                 d.Date = moment(d.Date + "-2020", dateFormat);
-                d.Total = parseFloat(d.Total);
+                d.Total = parseFloat(d.Cases);
             });
             data = data.filter(x => x.Prov !== "RC");
             const cf = crossfilter(data);
