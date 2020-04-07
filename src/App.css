@@ -47,6 +47,9 @@
 .dc-chart path.area {
   fill-opacity: 0.5 !important;
 }
+.dc-chart path.line {
+  stroke-width:3 !important;
+}
 
 #title{
   text-transform: uppercase;
