@@ -74,7 +74,7 @@ const dailyTimeChartFunc = (
             .brushOn(false)
             .clipPadding(10)
             .margins({ left: 40, top: 10, right: 10, bottom: 20 })
-            .renderDataPoints({ radius: 2, fillOpacity: 1 })
+            // .renderDataPoints({ radius: 2, fillOpacity: 1 })
             .ordinalColors(colors)
             .x(
                 scaleTime().domain([

@@ -20,7 +20,7 @@ export const colorf = () => {
     ];
     return cols.map(x =>
         rgb(x[0], x[1], x[2])
-            .darker()
+            .darker(.5)
             .formatHex()
     );
 };
