@@ -25,12 +25,12 @@ export const ChartTemplate = props => {
     const context = React.useContext(CXContext);
     const [chart, updateChart] = React.useState(null);
     const [chartData, updateChartData] = React.useState({'a':1, 'b':0});
-    let dims;
-    if (props.params.usedata === "detail") {
-        dims = context.dimensions;
-    } else if (props.params.usedata === "deaths") {
-        dims = context.dimensionsD;
-    }
+    let dims = context.dimensions[props.params.usedata];
+    // if (props.params.usedata === "detail") {
+    //     dims = context.dimensions;
+    // } else if (props.params.usedata === "deaths") {
+    //     dims = context.dimensionsD;
+    // }
     const div = React.useRef(null);
     const windowSize = useWindowDimensions()
     React.useEffect(() => {

@@ -1,5 +1,6 @@
 import { rgb } from "d3-color";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import {popData}  from "./data/country-by-population";
 
 export const colorf = () => {
     //http://tsitsul.in/blog/coloropt/
@@ -105,3 +106,13 @@ export function provinceTotalReduce(group){
     );
     return pCounts;
 }
+
+export const populationW = {};
+const renames = {
+    "Czech Republic":"Czechia",
+    "United States":"US"
+}
+popData.forEach(x=>{
+    const name = renames.hasOwnProperty(x.country)? renames[x.country]:x.country;
+    populationW[name]=(+x.population)/1e6;
+});

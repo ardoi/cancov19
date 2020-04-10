@@ -1,7 +1,7 @@
 import React from "react";
 import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
-import { colorf, sortpc, population, totalReduce} from "../util";
+import { colorf, sortpc, population, totalReduce, populationW} from "../util";
 
 const provinceChartFunc = (
     divRef,
@@ -29,7 +29,8 @@ const provinceChartFunc = (
         }
         const group = dimension.group();
         const colors = colorf();
-        const provinces = totalReduce(group).all()
+        // const provinces = totalReduce(group).all()
+        const provinces = totalReduce(group).top(10)
         sortpc(provinces, colors);
         const provinceChart = dc.rowChart(divRef);
         const normalize = params.normalize;
@@ -41,10 +42,12 @@ const provinceChartFunc = (
             .margins({ top: 10, right: 50, bottom: 30, left: 40 })
             .dimension(dimension)
             .group(group)
+            .cap(13)
             .elasticX(true)
-            .labelOffsetX(-25)
+            .othersGrouper(false)
+            // .labelOffsetX(-25)
             .valueAccessor(x =>
-                normalize ? x.value / population[x.key] : x.value
+                normalize ? x.value / populationW[x.key] : x.value
             )
             .ordinalColors(
                 colors.slice(0, Object.keys(provinces).length).reverse()
@@ -61,7 +64,7 @@ export const ProvinceChart = props => {
     return (
         <ChartTemplate
             chartFunction={provinceChartFunc}
-            title="Province Totals"
+            title={props.params.loc + " totals"}
             reset={true}
             params={props.params}
         />

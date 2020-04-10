@@ -54,3 +54,7 @@
 #title{
   text-transform: uppercase;
 }
+
+.plotPane{
+  border: none !important;
+}

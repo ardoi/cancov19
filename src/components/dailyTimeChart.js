@@ -1,7 +1,7 @@
 import React from "react";
 import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
-import { scaleTime } from "d3";
+import { scaleTime, format } from "d3";
 import moment from "moment";
 import { colorf, sortpc, totalReduce, provinceTotalReduce } from "../util";
 
@@ -50,7 +50,8 @@ const dailyTimeChartFunc = (
         };
 
         const colors = colorf();
-        const provinces = provincesG.all();
+        // const provinces = provincesG.all();
+        const provinces = provincesG.top(13);
         sortpc(provinces, colors);
 
         const timeChart = dc.lineChart(divRef);
@@ -86,6 +87,7 @@ const dailyTimeChartFunc = (
             .ticks(5)
             .tickFormat(v => moment(v).format("DD/MM"));
 
+        timeChart.yAxis().tickFormat(v=>format(".2s")(v));
         if (stack) {
             for (const p of provinces.slice(1)) {
                 const pk = p.key;

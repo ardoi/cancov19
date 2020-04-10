@@ -1,7 +1,7 @@
 import React from "react";
 import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
-import { scaleTime } from "d3";
+import { scaleTime, format } from "d3";
 import moment from "moment";
 import { colorf, sortpc, totalReduce, provinceTotalReduce } from "../util";
 
@@ -16,7 +16,6 @@ const timeChartFunc = (
 
     const chartH0 = 350;
     const chartW0 = 475;
-
     if (chartData.hasOwnProperty("chart")) {
         const chart = chartData.chart;
 
@@ -79,7 +78,8 @@ const timeChartFunc = (
             const tCount = totalReduce(group);
             chartGroup = accumulate_group(tCount);
         }
-        const provinces = totalReduce(pgroup).all();
+        // const provinces = totalReduce(pgroup).all();
+        const provinces = totalReduce(pgroup).top(13);
         //sort provinces and colors together
         sortpc(provinces, colors);
         const smallestProvince = provinces[0].key;
@@ -92,9 +92,9 @@ const timeChartFunc = (
         if (stack) {
             timeChart
                 .dimension(dimension)
-                .group(chartGroup, smallestProvince, sel(smallestProvince));
+                .group(chartGroup, smallestProvince, sel(smallestProvince))//.top(10);
         } else {
-            timeChart.dimension(dimension).group(chartGroup);
+            timeChart.dimension(dimension).group(chartGroup)//.top(10);
         }
 
         const chartW = (windowSize.width / 1440) * chartW0;
@@ -121,13 +121,13 @@ const timeChartFunc = (
             .ticks(8)
             .tickFormat(v => moment(v).format("DD/MM"));
 
+        timeChart.yAxis().tickFormat(v=>format(".2s")(v));
         if (stack) {
             for (const p of provinces.slice(1)) {
                 const pk = p.key;
                 timeChart.stack(chartGroup, pk, sel(pk));
             }
         }
-        // console.log('update', updateChartData)
         updateChartData({ 'chart': timeChart });
         return timeChart;
     }
