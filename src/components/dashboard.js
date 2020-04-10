@@ -17,8 +17,7 @@ export const Dashboard = props => {
             menuItem: {content:"Canada", key:"canada", icon:'tree'},
             pane: (
                 <Tab.Pane attached="top" key={1}>
-                    {/* <CanadaDashboard/> */}
-                    <WorldDashboard/>
+                    <CanadaDashboard/>
                 </Tab.Pane>
             )
         },
@@ -26,7 +25,7 @@ export const Dashboard = props => {
             menuItem: {content:"World", key:"world", icon:'globe'},
             pane: (
                 <Tab.Pane attached="top" key={2}>
-                    {/* <WorldDashboard/> */}
+                    <WorldDashboard/>
                 </Tab.Pane>
             )
         }

@@ -36,6 +36,7 @@ const provinceChartFunc = (
         const normalize = params.normalize;
         const chartW = (windowSize.width / 1440) * chartW0;
         const chartH = (windowSize.width / 1440) * chartH0;
+        const popData = params.loc==="Country"?populationW:population;
         provinceChart
             .width(chartW)
             .height(chartH)
@@ -46,8 +47,9 @@ const provinceChartFunc = (
             .elasticX(true)
             .othersGrouper(false)
             // .labelOffsetX(-25)
-            .valueAccessor(x =>
-                normalize ? x.value / populationW[x.key] : x.value
+            .valueAccessor(x =>{
+                console.log(x, params);
+                return normalize ? x.value / popData[x.key] : x.value}
             )
             .ordinalColors(
                 colors.slice(0, Object.keys(provinces).length).reverse()

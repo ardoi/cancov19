@@ -3,7 +3,7 @@ import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
 import { scaleTime } from "d3";
 import moment from "moment";
-import { colorf, sortpc, population, populationW, totalReduce } from "../util";
+import { colorf, sortpc, population, populationW, totalReduce, provinceTotalReduce } from "../util";
 
 const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, updateChartData) => {
     const chartH0 = 350;
@@ -55,8 +55,8 @@ const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, update
     }
     const ag = accumulate_group(pCounts);
     chartGroup = ag;
-    const provinces = totalReduce(pdim.group()).top(13);
-    // const provinces = pdim.group().top(13);
+    // const provinces = totalReduce(pdim.group()).top(13);
+    const provinces = pdim.group().all();
     // const provinces = ag.top(13);
     //sort provinces and colors together
     sortpc(provinces, colors);
@@ -80,8 +80,8 @@ const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, update
                 .dimension(dimension)
                 .group(chartGroup, pk, sel(pk))
                 .colors(color)
+            )
             // .renderDataPoints({ radius: 2, fillOpacity: 1 })
-        );
     });
     
     const    chartW = windowSize.width/1440 * chartW0;

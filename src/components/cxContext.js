@@ -48,7 +48,7 @@ export default class DataContext extends Component {
                 date: cf.dimension(d => d.Date), 
                 dateN: cfn.dimension(d => d.Date),
                 prov: cf.dimension(d => d.Prov), 
-                provN: cfn.dimension(d => d.ProvN)
+                provN: cfn.dimension(d => d.Prov)
             };
             return data;
         };
@@ -69,7 +69,7 @@ export default class DataContext extends Component {
                 date: cfd.dimension(d => d.Date), 
                 dateN: cfdn.dimension(d => d.Date),
                 prov: cfd.dimension(d => d.Prov), 
-                provN: cfdn.dimension(d => d.ProvN)
+                provN: cfdn.dimension(d => d.Prov)
             };
             return data;
         };
@@ -78,27 +78,27 @@ export default class DataContext extends Component {
         const backupUrl = backupUrlBase + url;
         const backupUrl2 = backupUrlBase + url2g;
 
-        // const p1 = csv(url)
-        //     .then(processDetailData)
-        //     .catch(error => {
-        //         console.log("failed with url", error);
-        //         return csv(backupUrl)
-        //             .then(processDeathData)
-        //             .catch(error => {
-        //                 console.log("backuperror 1", error);
-        //             });
-        //     });
+        const p1 = csv(url)
+            .then(processDetailData)
+            .catch(error => {
+                console.log("failed with url", error);
+                return csv(backupUrl)
+                    .then(processDeathData)
+                    .catch(error => {
+                        console.log("backuperror 1", error);
+                    });
+            });
 
-        // const p2 = csv(url2g)
-        //     .then(processDeathData)
-        //     .catch(error => {
-        //         console.log("failed with url2", error);
-        //         return csv(backupUrl2)
-        //             .then(processDeathData)
-        //             .catch(error => {
-        //                 console.log("backuperror 2", error);
-        //             });
-        //     });
+        const p2 = csv(url2g)
+            .then(processDeathData)
+            .catch(error => {
+                console.log("failed with url2", error);
+                return csv(backupUrl2)
+                    .then(processDeathData)
+                    .catch(error => {
+                        console.log("backuperror 2", error);
+                    });
+            });
 
 
 
@@ -162,16 +162,16 @@ export default class DataContext extends Component {
         // });
         const p3 = processJHData(urlWorld, 'detailW');
         const p4 = processJHData(urlWorldD, 'deathsW');
-        Promise.all([p3, p4]).then(x => {
+        Promise.all([p1,p2, p3, p4]).then(x => {
             console.log("Done fetching data");
 
             this.setState({
                 loading: false,
                 hasCF: true,
-                // detailData: x[0],
-                // deathData: x[1],
-                // worldDetailData: x[2],
-                // worldDeathData: x[3]
+                detailData: x[0],
+                deathData: x[1],
+                worldDetailData: x[2],
+                worldDeathData: x[3]
             });
         });
     }
