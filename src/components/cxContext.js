@@ -10,9 +10,9 @@ export const CXContext = React.createContext("CXContext");
 export default class DataContext extends Component {
     state = {
         detailData: null,
+        detailDataW: null,
         deathData: null,
         detailDataW: null,
-        // dim:null,
         loading: false,
         hasCF: false
     };
@@ -130,7 +130,6 @@ export default class DataContext extends Component {
                 return {country: x[0], total:parseInt(x[1][x[1].length-1][1]) }
             })
             totals.sort((a,b)=>-a.total+b.total);
-            // console.log('q',q,totals)
             const keepAmount = 13; //Number of countries for which to keep data
             const keep = totals.slice(0,keepAmount-3).map(x=>x.country);
             const must_have = ['Canada','Pakistan','Estonia'];
@@ -170,16 +169,6 @@ export default class DataContext extends Component {
         });
         return p;
         }
-
-        // Promise.all([p1, p2]).then(x => {
-        //     console.log("Done fetching data");
-        //     this.setState({
-        //         loading: false,
-        //         hasCF: true,
-        //         detailData: x[0],
-        //         deathData: x[1]
-        //     });
-        // });
         const p3 = processJHData(urlWorld, 'detailW');
         const p4 = processJHData(urlWorldD, 'deathsW');
         Promise.all([p1,p2, p3, p4]).then(x => {
@@ -202,12 +191,6 @@ export default class DataContext extends Component {
         return (
             <CXContext.Provider
                 value={{
-                    // cf: this.cf,
-                    // cfd: this.cfd,
-                    // cfn: this.cfn,
-                    // cfdn: this.cfdn
-                    // dimensions: this.dimensions,
-                    // dimensionsD: this.dimensionsD,
                     dimensions: this.dims
                 }}
             >
