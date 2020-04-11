@@ -47,8 +47,10 @@ export const Dashboard = props => {
                     />
                 </Segment>
                 <Segment color="orange">
-                    Data source:{" "}
-                    <a href="https://virihealth.com/">ViriHealth</a>
+                    Data sources:{" "}
+                    <a href="https://virihealth.com/">ViriHealth</a> 
+                    {" "} and
+                    <a href="https://github.com/CSSEGISandData/COVID-19"> John Hopkins University CSSE</a>
                 </Segment>
             </DataContext>
         </div>
