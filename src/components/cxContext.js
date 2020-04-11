@@ -131,9 +131,12 @@ export default class DataContext extends Component {
             })
             totals.sort((a,b)=>-a.total+b.total);
             // console.log('q',q,totals)
-            const keepAmount = 20; //Number of countries for which to keep data
-            const keep = totals.slice(0,keepAmount).map(x=>x.country);
-            // console.log('keep', keep);
+            const keepAmount = 13; //Number of countries for which to keep data
+            const keep = totals.slice(0,keepAmount-3).map(x=>x.country);
+            const must_have = ['Canada','Pakistan','Estonia'];
+            must_have.forEach(x=>{
+                keep.push(x);
+            });
             const out = [];
             q.forEach(x => {
                 const country = x[0];
