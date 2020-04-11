@@ -32,7 +32,8 @@ const provinceChartFunc = (
         // const provinces = totalReduce(group).all()
         const provinces = totalReduce(group).top(10)
         sortpc(provinces, colors);
-        const provinceChart = dc.rowChart(divRef);
+        const chartGroup = `${params.usedata}_${params.loc}_${params.normalize?"normalized":"base"}`
+        const provinceChart = dc.rowChart(divRef, chartGroup);
         const normalize = params.normalize;
         const chartW = (windowSize.width / 1440) * chartW0;
         const chartH = (windowSize.width / 1440) * chartH0;
@@ -48,7 +49,7 @@ const provinceChartFunc = (
             .othersGrouper(false)
             // .labelOffsetX(-25)
             .valueAccessor(x =>{
-                console.log(x, params);
+                // console.log(x, params);
                 return normalize ? x.value / popData[x.key] : x.value}
             )
             .ordinalColors(

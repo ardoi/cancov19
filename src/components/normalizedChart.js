@@ -55,8 +55,8 @@ const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, update
     }
     const ag = accumulate_group(pCounts);
     chartGroup = ag;
-    // const provinces = totalReduce(pdim.group()).top(13);
-    const provinces = pdim.group().all();
+    const provinces = totalReduce(pdim.group()).top(13);
+    // const provinces = pdim.group().all();
     // const provinces = ag.top(13);
     //sort provinces and colors together
     sortpc(provinces, colors);
@@ -65,7 +65,8 @@ const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, update
         return d => d.value[i] || 0;
     };
 
-    const timeChart = dc.compositeChart(divRef);
+    const dcchartGroup = `${params.usedata}_${params.loc}_${params.normalize?"normalized":"base"}`
+    const timeChart = dc.compositeChart(divRef, dcchartGroup);
 
     const charts = [];
 

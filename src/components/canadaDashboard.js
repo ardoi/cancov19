@@ -27,7 +27,7 @@ export const CanadaDashboard = props => {
             menuItem: "Stacked",
             pane: (
                 <Tab.Pane attached="top" key={1}>
-                    <TimeChart params={{ stacked: true, usedata: "detailC" }} />
+                    <TimeChart params={{ stacked: true, usedata: "detailC" ,loc:"Province"  }} />
                 </Tab.Pane>
             )
         },
@@ -35,7 +35,7 @@ export const CanadaDashboard = props => {
             menuItem: "Total",
             pane: (
                 <Tab.Pane attached="top" key={2}>
-                    <TimeChart params={{ stacked: false, usedata: "detailC" }} />
+                    <TimeChart params={{ stacked: false, usedata: "detailC" ,loc:"Province"  }} />
                 </Tab.Pane>
             )
         }
@@ -46,7 +46,7 @@ export const CanadaDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={3}>
                     <DailyTimeChart
-                        params={{ stacked: true, usedata: "detailC" }}
+                        params={{ stacked: true, usedata: "detailC" ,loc:"Province"  }}
                     />
                 </Tab.Pane>
             )
@@ -56,7 +56,7 @@ export const CanadaDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={4}>
                     <DailyTimeChart
-                        params={{ stacked: false, usedata: "detailC" }}
+                        params={{ stacked: false, usedata: "detailC" ,loc:"Province"  }}
                     />
                 </Tab.Pane>
             )
@@ -141,7 +141,7 @@ export const CanadaDashboard = props => {
             menuItem: "Stacked",
             pane: (
                 <Tab.Pane attached="top" key={11}>
-                    <TimeChart params={{ stacked: true, usedata: "deathC" }} />
+                    <TimeChart params={{ stacked: true, usedata: "deathC" ,loc:"Province"  }} />
                 </Tab.Pane>
             )
         },
@@ -149,7 +149,7 @@ export const CanadaDashboard = props => {
             menuItem: "Total",
             pane: (
                 <Tab.Pane attached="top" key={12}>
-                    <TimeChart params={{ stacked: false, usedata: "deathC" }} />
+                    <TimeChart params={{ stacked: false, usedata: "deathC" ,loc:"Province"  }} />
                 </Tab.Pane>
             )
         }
@@ -160,7 +160,7 @@ export const CanadaDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={13}>
                     <DailyTimeChart
-                        params={{ stacked: true, usedata: "deathC" }}
+                        params={{ stacked: true, usedata: "deathC" ,loc:"Province"  }}
                     />
                 </Tab.Pane>
             )
@@ -170,7 +170,7 @@ export const CanadaDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={14}>
                     <DailyTimeChart
-                        params={{ stacked: false, usedata: "deathC" }}
+                        params={{ stacked: false, usedata: "deathC" ,loc:"Province"  }}
                     />
                 </Tab.Pane>
             )

@@ -87,7 +87,8 @@ const timeChartFunc = (
             return d => d.value[i] || 0;
         };
 
-        const timeChart = dc.lineChart(divRef);
+        const dcchartGroup = `${params.usedata}_${params.loc}_${params.normalize?"normalized":"base"}`
+        const timeChart = dc.lineChart(divRef, dcchartGroup);
 
         if (stack) {
             timeChart

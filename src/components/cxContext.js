@@ -102,8 +102,11 @@ export default class DataContext extends Component {
 
 
 
-        const urlWorld = "https://rawcdn.githack.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
-        const urlWorldD = "https://rawcdn.githack.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+        // const urlWorld = "https://rawcdn.githack.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+        // const urlWorldD = "https://rawcdn.githack.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+        const urlWorld = "https://cdn.jsdelivr.net/gh/CSSEGISandData/COVID-19@master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+
+        const urlWorldD = "https://cdn.jsdelivr.net/gh/CSSEGISandData/COVID-19@master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 
         const processJHData = (url, key) =>{
             const p = csv(url).then(data => {
@@ -123,16 +126,30 @@ export default class DataContext extends Component {
                     d => d.date
                 )
             );
+            const totals=q.map(x=>{
+                return {country: x[0], total:parseInt(x[1][x[1].length-1][1]) }
+            })
+            totals.sort((a,b)=>-a.total+b.total);
+            // console.log('q',q,totals)
+            const keepAmount = 20; //Number of countries for which to keep data
+            const keep = totals.slice(0,keepAmount).map(x=>x.country);
+            // console.log('keep', keep);
             const out = [];
             q.forEach(x => {
                 const country = x[0];
+                if(keep.includes(country)){
                 for (let i = 0; i < x[1].length; i++) {
+                    const total = i === 0 ? x[1][i][1] : x[1][i][1] - x[1][i - 1][1];
+                    if(i>0 && total==0){
+                        continue
+                    }
                     out.push({
                         Prov:country,
                         Date: moment(x[1][i][0],"M/DD/YY"),
-                        Total: i === 0 ? x[1][i][1] : x[1][i][1] - x[1][i - 1][1]
+                        Total: total
                     });
                 }
+            }
             });
             const cfw = crossfilter(out);
             const clonedData = JSON.parse(JSON.stringify(out));

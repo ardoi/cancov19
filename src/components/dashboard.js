@@ -36,7 +36,7 @@ export const Dashboard = props => {
                 <Segment color="black" inverted>
                     <Header color="yellow" id="title" textAlign="center">
                         <Icon name="heartbeat" />
-                        Canada Covid-19 data visualization
+                        Canada+World Covid-19 data visualization
                     </Header>
                 </Segment>
                 <Segment>

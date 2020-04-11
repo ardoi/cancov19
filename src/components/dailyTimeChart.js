@@ -54,7 +54,8 @@ const dailyTimeChartFunc = (
         const provinces = provincesG.top(13);
         sortpc(provinces, colors);
 
-        const timeChart = dc.lineChart(divRef);
+        const dcchartGroup = `${params.usedata}_${params.loc}_${params.normalize?"normalized":"base"}`
+        const timeChart = dc.lineChart(divRef, dcchartGroup);
 
         const smallestProvince = provinces[0].key;
         if (stack) {
