@@ -21,13 +21,14 @@ import {
     Icon
 } from "semantic-ui-react";
 
+const LOC = "Country";
 export const WorldDashboard = props => {
     const panes_cumulative = [
         {
             menuItem: "Stacked",
             pane: (
                 <Tab.Pane attached="top" key={1}>
-                    <TimeChart params={{ stacked: true, usedata: "detailW" , loc:"Country"}} />
+                    <TimeChart params={{ stacked: true, usedata: "detailW" , loc:LOC}} />
                 </Tab.Pane>
             )
         },
@@ -35,7 +36,7 @@ export const WorldDashboard = props => {
             menuItem: "Total",
             pane: (
                 <Tab.Pane attached="top" key={2}>
-                    <TimeChart params={{ stacked: false, usedata: "detailW" , loc:"Country"}} />
+                    <TimeChart params={{ stacked: false, usedata: "detailW" , loc:LOC}} />
                 </Tab.Pane>
             )
         }
@@ -46,7 +47,7 @@ export const WorldDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={3}>
                     <DailyTimeChart
-                        params={{ stacked: true, usedata: "detailW" , loc:"Country"}}
+                        params={{ stacked: true, usedata: "detailW" , loc:LOC}}
                     />
                 </Tab.Pane>
             )
@@ -56,7 +57,7 @@ export const WorldDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={4}>
                     <DailyTimeChart
-                        params={{ stacked: false, usedata: "detailW" , loc:"Country"}}
+                        params={{ stacked: false, usedata: "detailW" , loc:LOC}}
                     />
                 </Tab.Pane>
             )
@@ -75,7 +76,8 @@ export const WorldDashboard = props => {
                                         <StatNumber
                                             params={{
                                                 usedata: "detailW",
-                                                total: true
+                                                total: true,
+                                                loc:LOC
                                             }}
                                         />
                                     </StatisticValue>
@@ -89,7 +91,8 @@ export const WorldDashboard = props => {
                                             params={{
                                                 usedata: "detailW",
                                                 total: false,
-                                                date: true
+                                                // date: true
+                                                loc:LOC
                                             }}
                                         />
                                     </StatisticValue>
@@ -106,7 +109,7 @@ export const WorldDashboard = props => {
 
                         <Grid.Column width={16}>
                             <Segment>
-                                <ProvinceChart params={{ usedata: "detailW", loc:"Country" }} />
+                                <ProvinceChart params={{ usedata: "detailW", loc:LOC }} />
                             </Segment>
                         </Grid.Column>
                     </Grid>
@@ -138,7 +141,7 @@ export const WorldDashboard = props => {
             menuItem: "Stacked",
             pane: (
                 <Tab.Pane attached="top" key={11}>
-                    <TimeChart params={{ stacked: true, usedata: "deathsW" , loc:"Country"}} />
+                    <TimeChart params={{ stacked: true, usedata: "deathsW" , loc:LOC}} />
                 </Tab.Pane>
             )
         },
@@ -146,7 +149,7 @@ export const WorldDashboard = props => {
             menuItem: "Total",
             pane: (
                 <Tab.Pane attached="top" key={12}>
-                    <TimeChart params={{ stacked: false, usedata: "deathsW" , loc:"Country"}} />
+                    <TimeChart params={{ stacked: false, usedata: "deathsW" , loc:LOC}} />
                 </Tab.Pane>
             )
         }
@@ -157,7 +160,7 @@ export const WorldDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={13}>
                     <DailyTimeChart
-                        params={{ stacked: true, usedata: "deathsW" , loc:"Country"}}
+                        params={{ stacked: true, usedata: "deathsW" , loc:LOC}}
                     />
                 </Tab.Pane>
             )
@@ -167,7 +170,7 @@ export const WorldDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={14}>
                     <DailyTimeChart
-                        params={{ stacked: false, usedata: "deathsW" , loc:"Country"}}
+                        params={{ stacked: false, usedata: "deathsW" , loc:LOC}}
                     />
                 </Tab.Pane>
             )
@@ -187,7 +190,8 @@ export const WorldDashboard = props => {
                                         <StatNumber
                                             params={{
                                                 usedata: "deathsW",
-                                                total: true
+                                                total: true,
+                                                loc:LOC
                                             }}
                                         />
                                     </StatisticValue>
@@ -203,7 +207,8 @@ export const WorldDashboard = props => {
                                             params={{
                                                 usedata: "deathsW",
                                                 total: false,
-                                                date: true
+                                                // date: true
+                                                loc:LOC
                                             }}
                                         />
                                     </StatisticValue>
@@ -219,7 +224,7 @@ export const WorldDashboard = props => {
                         </GridRow>
                         <Grid.Column width={16}>
                             <Segment>
-                                <ProvinceChart params={{ usedata: "deathsW", loc:"Country" }} />
+                                <ProvinceChart params={{ usedata: "deathsW", loc:LOC }} />
                             </Segment>
                         </Grid.Column>
                     </Grid>
@@ -257,14 +262,14 @@ export const WorldDashboard = props => {
                 <Grid.Column width={4}>
                     <Segment>
                         <ProvinceChart
-                            params={{ usedata: "detailW", normalize: true, loc:"Country" }}
+                            params={{ usedata: "detailW", normalize: true, loc:LOC }}
                         />
                     </Segment>
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <Segment>
                         <NormalizedChart
-                            params={{ usedata: "detailW", normalize: true, loc:"Country" }}
+                            params={{ usedata: "detailW", normalize: true, loc:LOC }}
                         />
                     </Segment>
                 </Grid.Column>
@@ -282,14 +287,14 @@ export const WorldDashboard = props => {
                 <Grid.Column width={4}>
                     <Segment>
                         <ProvinceChart
-                            params={{ usedata: "deathsW", normalize: true , loc:"Country"}}
+                            params={{ usedata: "deathsW", normalize: true , loc:LOC}}
                         />
                     </Segment>
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <Segment>
                         <NormalizedChart
-                            params={{ usedata: "deathsW", normalize: true, loc:"Country"}}
+                            params={{ usedata: "deathsW", normalize: true, loc:LOC}}
                         />
                     </Segment>
                 </Grid.Column>

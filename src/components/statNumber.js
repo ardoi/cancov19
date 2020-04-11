@@ -14,7 +14,8 @@ const statNumberFunc = (divRef, dimensions, params) => {
         group = totalReduce(dimension.group());
         getValue = x => x.value;
     }
-    const quarterChart = dc.numberDisplay(divRef);
+    const dcchartGroup = `${params.usedata}_${params.loc}_${params.normalize?"normalized":"base"}`
+    const quarterChart = dc.numberDisplay(divRef, dcchartGroup);
     quarterChart
         .valueAccessor(getValue)
         .ordering(x => x.key)

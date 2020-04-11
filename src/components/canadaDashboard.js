@@ -21,13 +21,14 @@ import {
     Icon
 } from "semantic-ui-react";
 
+const LOC = "Province";
 export const CanadaDashboard = props => {
     const panes_cumulative = [
         {
             menuItem: "Stacked",
             pane: (
                 <Tab.Pane attached="top" key={1}>
-                    <TimeChart params={{ stacked: true, usedata: "detailC" ,loc:"Province"  }} />
+                    <TimeChart params={{ stacked: true, usedata: "detailC" ,loc:LOC  }} />
                 </Tab.Pane>
             )
         },
@@ -35,7 +36,7 @@ export const CanadaDashboard = props => {
             menuItem: "Total",
             pane: (
                 <Tab.Pane attached="top" key={2}>
-                    <TimeChart params={{ stacked: false, usedata: "detailC" ,loc:"Province"  }} />
+                    <TimeChart params={{ stacked: false, usedata: "detailC" ,loc:LOC  }} />
                 </Tab.Pane>
             )
         }
@@ -46,7 +47,7 @@ export const CanadaDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={3}>
                     <DailyTimeChart
-                        params={{ stacked: true, usedata: "detailC" ,loc:"Province"  }}
+                        params={{ stacked: true, usedata: "detailC" ,loc:LOC  }}
                     />
                 </Tab.Pane>
             )
@@ -56,7 +57,7 @@ export const CanadaDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={4}>
                     <DailyTimeChart
-                        params={{ stacked: false, usedata: "detailC" ,loc:"Province"  }}
+                        params={{ stacked: false, usedata: "detailC" ,loc:LOC  }}
                     />
                 </Tab.Pane>
             )
@@ -78,7 +79,8 @@ export const CanadaDashboard = props => {
                                         <StatNumber
                                             params={{
                                                 usedata: "detailC",
-                                                total: true
+                                                total: true,
+                                                loc: LOC
                                             }}
                                         />
                                     </StatisticValue>
@@ -92,7 +94,8 @@ export const CanadaDashboard = props => {
                                             params={{
                                                 usedata: "detailC",
                                                 total: false,
-                                                date: true
+                                                // date: true,
+                                                loc: LOC
                                             }}
                                         />
                                     </StatisticValue>
@@ -109,7 +112,7 @@ export const CanadaDashboard = props => {
 
                         <Grid.Column width={16}>
                             <Segment>
-                                <ProvinceChart params={{ usedata: "detailC",loc:"Province"  }} />
+                                <ProvinceChart params={{ usedata: "detailC",loc:LOC  }} />
                             </Segment>
                         </Grid.Column>
                     </Grid>
@@ -141,7 +144,7 @@ export const CanadaDashboard = props => {
             menuItem: "Stacked",
             pane: (
                 <Tab.Pane attached="top" key={11}>
-                    <TimeChart params={{ stacked: true, usedata: "deathC" ,loc:"Province"  }} />
+                    <TimeChart params={{ stacked: true, usedata: "deathC" ,loc:LOC  }} />
                 </Tab.Pane>
             )
         },
@@ -149,7 +152,7 @@ export const CanadaDashboard = props => {
             menuItem: "Total",
             pane: (
                 <Tab.Pane attached="top" key={12}>
-                    <TimeChart params={{ stacked: false, usedata: "deathC" ,loc:"Province"  }} />
+                    <TimeChart params={{ stacked: false, usedata: "deathC" ,loc:LOC  }} />
                 </Tab.Pane>
             )
         }
@@ -160,7 +163,7 @@ export const CanadaDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={13}>
                     <DailyTimeChart
-                        params={{ stacked: true, usedata: "deathC" ,loc:"Province"  }}
+                        params={{ stacked: true, usedata: "deathC" ,loc:LOC  }}
                     />
                 </Tab.Pane>
             )
@@ -170,7 +173,7 @@ export const CanadaDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={14}>
                     <DailyTimeChart
-                        params={{ stacked: false, usedata: "deathC" ,loc:"Province"  }}
+                        params={{ stacked: false, usedata: "deathC" ,loc:LOC  }}
                     />
                 </Tab.Pane>
             )
@@ -190,7 +193,8 @@ export const CanadaDashboard = props => {
                                         <StatNumber
                                             params={{
                                                 usedata: "deathC",
-                                                total: true
+                                                total: true,
+                                                loc:LOC
                                             }}
                                         />
                                     </StatisticValue>
@@ -206,7 +210,9 @@ export const CanadaDashboard = props => {
                                             params={{
                                                 usedata: "deathC",
                                                 total: false,
-                                                date: true
+                                                // date: true,
+                                                loc:LOC
+
                                             }}
                                         />
                                     </StatisticValue>
@@ -222,7 +228,7 @@ export const CanadaDashboard = props => {
                         </GridRow>
                         <Grid.Column width={16}>
                             <Segment>
-                                <ProvinceChart params={{ usedata: "deathC",loc:"Province" }} />
+                                <ProvinceChart params={{ usedata: "deathC",loc:LOC }} />
                             </Segment>
                         </Grid.Column>
                     </Grid>
@@ -260,14 +266,14 @@ export const CanadaDashboard = props => {
                 <Grid.Column width={4}>
                     <Segment>
                         <ProvinceChart
-                            params={{ usedata: "detailC", normalize: true, loc:"Province" }}
+                            params={{ usedata: "detailC", normalize: true, loc:LOC }}
                         />
                     </Segment>
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <Segment>
                         <NormalizedChart
-                            params={{ usedata: "detailC", normalize: true, loc:"Province" }}
+                            params={{ usedata: "detailC", normalize: true, loc:LOC }}
                         />
                     </Segment>
                 </Grid.Column>
@@ -285,14 +291,14 @@ export const CanadaDashboard = props => {
                 <Grid.Column width={4}>
                     <Segment>
                         <ProvinceChart
-                            params={{ usedata: "deathC", normalize: true,loc:"Province"  }}
+                            params={{ usedata: "deathC", normalize: true,loc:LOC  }}
                         />
                     </Segment>
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <Segment>
                         <NormalizedChart
-                            params={{ usedata: "deathC", normalize: true,loc:"Province"  }}
+                            params={{ usedata: "deathC", normalize: true,loc:LOC  }}
                         />
                     </Segment>
                 </Grid.Column>
