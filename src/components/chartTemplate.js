@@ -14,7 +14,7 @@ const ResetButton = props => {
             {...style}
             onClick={() => {
                 props.chart.filterAll();
-                dc.redrawAll();
+                dc.redrawAll(props.group);
             }}
         >
             reset
@@ -42,8 +42,9 @@ export const ChartTemplate = props => {
 
     let button;
     let label;
+    const chartGroup = `${props.params.usedata}_${props.params.loc}_${props.params.normalize?"normalized":"base"}`
     if (props.reset) {
-        button = <ResetButton chart={chart} />;
+        button = <ResetButton chart={chart} group={chartGroup} />;
         label= <Popup content="Pick province(s) to filter results and click Reset to restore defaults" trigger={<Label circular color='teal'>?</Label>}/>
     }
     let header;
