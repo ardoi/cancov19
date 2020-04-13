@@ -4,6 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import { ProvinceChart } from "./provinceChart";
 import { TimeChart } from "./timeChart";
 import { StatNumber } from "./statNumber";
+import { LineChart } from "./lineChart";
 import { DailyTimeChart } from "./dailyTimeChart";
 import { NormalizedChart } from "./normalizedChart";
 import { LastDateDisplay } from "./textDisplay";
@@ -33,9 +34,17 @@ export const WorldDashboard = props => {
             )
         },
         {
-            menuItem: "Total",
+            menuItem: "Lines",
             pane: (
                 <Tab.Pane attached="top" key={2}>
+                    <LineChart params={{ stacked: false, usedata: "detailW" ,loc:LOC, cumulative:true  }} />
+                </Tab.Pane>
+            )
+        },
+        {
+            menuItem: "Total",
+            pane: (
+                <Tab.Pane attached="top" key={3}>
                     <TimeChart params={{ stacked: false, usedata: "detailW" , loc:LOC}} />
                 </Tab.Pane>
             )
@@ -45,7 +54,7 @@ export const WorldDashboard = props => {
         {
             menuItem: "Stacked",
             pane: (
-                <Tab.Pane attached="top" key={3}>
+                <Tab.Pane attached="top" key={4}>
                     <DailyTimeChart
                         params={{ stacked: true, usedata: "detailW" , loc:LOC}}
                     />
@@ -53,9 +62,17 @@ export const WorldDashboard = props => {
             )
         },
         {
+            menuItem: "Lines",
+            pane: (
+                <Tab.Pane attached="top" key={5}>
+                    <LineChart params={{ stacked: false, usedata: "detailW" ,loc:LOC, cumulative:false  }} />
+                </Tab.Pane>
+            )
+        },
+        {
             menuItem: "Total",
             pane: (
-                <Tab.Pane attached="top" key={4}>
+                <Tab.Pane attached="top" key={6}>
                     <DailyTimeChart
                         params={{ stacked: false, usedata: "detailW" , loc:LOC}}
                     />
@@ -146,9 +163,17 @@ export const WorldDashboard = props => {
             )
         },
         {
-            menuItem: "Total",
+            menuItem: "Lines",
             pane: (
                 <Tab.Pane attached="top" key={12}>
+                    <LineChart params={{ stacked: false, usedata: "deathsW" ,loc:LOC, cumulative:true  }} />
+                </Tab.Pane>
+            )
+        },
+        {
+            menuItem: "Total",
+            pane: (
+                <Tab.Pane attached="top" key={13}>
                     <TimeChart params={{ stacked: false, usedata: "deathsW" , loc:LOC}} />
                 </Tab.Pane>
             )
@@ -158,7 +183,7 @@ export const WorldDashboard = props => {
         {
             menuItem: "Stacked",
             pane: (
-                <Tab.Pane attached="top" key={13}>
+                <Tab.Pane attached="top" key={14}>
                     <DailyTimeChart
                         params={{ stacked: true, usedata: "deathsW" , loc:LOC}}
                     />
@@ -166,9 +191,17 @@ export const WorldDashboard = props => {
             )
         },
         {
+            menuItem: "Lines",
+            pane: (
+                <Tab.Pane attached="top" key={15}>
+                    <LineChart params={{ stacked: false, usedata: "deathsW" ,loc:LOC, cumulative:false  }} />
+                </Tab.Pane>
+            )
+        },
+        {
             menuItem: "Total",
             pane: (
-                <Tab.Pane attached="top" key={14}>
+                <Tab.Pane attached="top" key={16}>
                     <DailyTimeChart
                         params={{ stacked: false, usedata: "deathsW" , loc:LOC}}
                     />

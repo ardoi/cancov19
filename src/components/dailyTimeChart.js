@@ -25,15 +25,8 @@ const dailyTimeChartFunc = (
         chart.width(chartW).height(chartH);
         return chart;
     } else {
-        let dimension;
-        let pdim;
-        if (params.normalize) {
-            dimension = dimensions["dateN"];
-            pdim = dimensions["provN"];
-        } else {
-            dimension = dimensions["date"];
-            pdim = dimensions["prov"];
-        }
+        const dimension = dimensions["date"];
+        const pdim = dimensions["prov"];
         const group = dimension.group();
         const stack = params.stacked;
         let chartGroup = group;

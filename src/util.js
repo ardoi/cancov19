@@ -107,6 +107,36 @@ export function provinceTotalReduce(group){
     return pCounts;
 }
 
+export const accumulateGroup = (source_group) => {
+    return {
+        all: function() {
+            const sa = source_group.all();
+            const cumulate = {};
+            const res = [];
+            for (const el of sa) {
+                for (let [k, v] of Object.entries(el.value)) {
+                    cumulate[k] = (cumulate[k] || 0) + v;
+                }
+                res.push({ key: el.key, value: { ...cumulate } });
+            }
+            return res;
+        }
+    };
+}
+export const accumulateGroupTotal = (source_group)=>{
+    return {
+        all: function() {
+            const sa = source_group.all();
+            let cumulate = 0;
+            const res = [];
+            for (const el of sa) {
+                cumulate += el.value;
+                res.push({ key: el.key, value: cumulate });
+            }
+            return res;
+        }
+    };
+}
 export const populationW = {};
 const renames = {
     "Czech Republic":"Czechia",

@@ -3,6 +3,7 @@ import "semantic-ui-css/semantic.min.css";
 
 import { ProvinceChart } from "./provinceChart";
 import { TimeChart } from "./timeChart";
+import { LineChart } from "./lineChart";
 import { StatNumber } from "./statNumber";
 import { DailyTimeChart } from "./dailyTimeChart";
 import { NormalizedChart } from "./normalizedChart";
@@ -33,9 +34,17 @@ export const CanadaDashboard = props => {
             )
         },
         {
-            menuItem: "Total",
+            menuItem: "Lines",
             pane: (
                 <Tab.Pane attached="top" key={2}>
+                    <LineChart params={{ stacked: false, usedata: "detailC" ,loc:LOC, cumulative:true  }} />
+                </Tab.Pane>
+            )
+        },
+        {
+            menuItem: "Total",
+            pane: (
+                <Tab.Pane attached="top" key={3}>
                     <TimeChart params={{ stacked: false, usedata: "detailC" ,loc:LOC  }} />
                 </Tab.Pane>
             )
@@ -45,7 +54,7 @@ export const CanadaDashboard = props => {
         {
             menuItem: "Stacked",
             pane: (
-                <Tab.Pane attached="top" key={3}>
+                <Tab.Pane attached="top" key={4}>
                     <DailyTimeChart
                         params={{ stacked: true, usedata: "detailC" ,loc:LOC  }}
                     />
@@ -53,9 +62,17 @@ export const CanadaDashboard = props => {
             )
         },
         {
+            menuItem: "Lines",
+            pane: (
+                <Tab.Pane attached="top" key={5}>
+                    <LineChart params={{ stacked: false, usedata: "detailC" ,loc:LOC, cumulative:false }} />
+                </Tab.Pane>
+            )
+        },
+        {
             menuItem: "Total",
             pane: (
-                <Tab.Pane attached="top" key={4}>
+                <Tab.Pane attached="top" key={6}>
                     <DailyTimeChart
                         params={{ stacked: false, usedata: "detailC" ,loc:LOC  }}
                     />
@@ -149,9 +166,17 @@ export const CanadaDashboard = props => {
             )
         },
         {
-            menuItem: "Total",
+            menuItem: "Lines",
             pane: (
                 <Tab.Pane attached="top" key={12}>
+                    <LineChart params={{ stacked: false, usedata: "deathC" ,loc:LOC, cumulative:true  }} />
+                </Tab.Pane>
+            )
+        },
+        {
+            menuItem: "Total",
+            pane: (
+                <Tab.Pane attached="top" key={13}>
                     <TimeChart params={{ stacked: false, usedata: "deathC" ,loc:LOC  }} />
                 </Tab.Pane>
             )
@@ -161,7 +186,7 @@ export const CanadaDashboard = props => {
         {
             menuItem: "Stacked",
             pane: (
-                <Tab.Pane attached="top" key={13}>
+                <Tab.Pane attached="top" key={14}>
                     <DailyTimeChart
                         params={{ stacked: true, usedata: "deathC" ,loc:LOC  }}
                     />
@@ -169,9 +194,17 @@ export const CanadaDashboard = props => {
             )
         },
         {
+            menuItem: "Lines",
+            pane: (
+                <Tab.Pane attached="top" key={15}>
+                    <LineChart params={{ stacked: false, usedata: "deathC" ,loc:LOC, cumulative:false  }} />
+                </Tab.Pane>
+            )
+        },
+        {
             menuItem: "Total",
             pane: (
-                <Tab.Pane attached="top" key={14}>
+                <Tab.Pane attached="top" key={16}>
                     <DailyTimeChart
                         params={{ stacked: false, usedata: "deathC" ,loc:LOC  }}
                     />

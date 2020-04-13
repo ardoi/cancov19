@@ -3,9 +3,9 @@ import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
 import { scaleTime } from "d3";
 import moment from "moment";
-import { colorf, sortpc, population, populationW, totalReduce, provinceTotalReduce } from "../util";
+import { colorf, sortpc, population, populationW, totalReduce, provinceTotalReduce, accumulateGroup } from "../util";
 
-const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, updateChartData) => {
+const chartFunc = (divRef, dimensions, params, windowSize, chartData, updateChartData) => {
     const chartH0 = 350;
     const chartW0 = 475;
 
@@ -18,46 +18,26 @@ const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, update
         chart.width(chartW).height(chartH);
         return chart;
     } else {
-    let dimension;
-    let pdim;
-    dimension = dimensions['dateN'];
-    pdim = dimensions['provN'];
+
+    const dimension = dimensions["date"];
+    const pgroup = dimensions["prov"].group();
     const group = dimension.group();
-    // let chartGroup = group;
+    // Per location totals for ranking the row chart and assigning colors
+    const provinces = totalReduce(pgroup).top(13); 
     const colors = colorf();
-    const popData = params.loc==="Country"?populationW:population;
-    const pCounts = group.reduce(
-        (p, v) => {
-            p[v.Prov] = (p[v.Prov] || 0) + v.Total / popData[v.Prov];
-            return p;
-        },
-        (p, v) => {
-            p[v.Prov] = p[v.Prov] - v.Total / popData[v.Prov];
-            return p;
-        },
-        () => ({})
-    );
-    function accumulate_group(source_group) {
-        return {
-            all: function() {
-                const sa = source_group.all();
-                const cumulate = {};
-                const res = [];
-                for (const el of sa) {
-                    for (let [k, v] of Object.entries(el.value)) {
-                        cumulate[k] = (cumulate[k] || 0) + v;
-                    }
-                    res.push({ key: el.key, value: { ...cumulate } });
-                }
-                return res;
-            }
-        };
+
+    const pCounts = provinceTotalReduce(group);
+    let chartGroup;
+    if (params.cumulative){
+        const ag = accumulateGroup(pCounts);
+        chartGroup = ag;
     }
-    const ag = accumulate_group(pCounts);
-    const chartGroup = ag;
-    const provinces = totalReduce(pdim.group()).top(13);
+    else{
+        chartGroup = pCounts;
+    }
+    //sort provinces and colors together
     sortpc(provinces, colors);
-    const smallestProvince = provinces[0].key;
+    // const smallestProvince = provinces[0].key;
     const sel = i => {
         return d => d.value[i] || 0;
     };
@@ -76,19 +56,21 @@ const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, update
                 .dimension(dimension)
                 .group(chartGroup, pk, sel(pk))
                 .colors(color)
+                .title(x=>{return `${x.key.format("d-MMM")}: ${pk} : ${x.value[pk]}`})
             )
-            // .renderDataPoints({ radius: 2, fillOpacity: 1 })
     });
     
     const    chartW = windowSize.width/1440 * chartW0;
     const    chartH = windowSize.width/1440 * chartH0;
     timeChart
+        // .renderArea(true)
         .elasticY(true)
         .width(chartW)
         .height(chartH)
         .brushOn(false)
         .clipPadding(10)
         .margins({ left: 50, top: 10, right: 10, bottom: 20 })
+        .shareTitle(false)
         .x(scaleTime().domain([new Date(2020, 2, 1), moment().add(1, "day")]))
         .compose(charts);
 
@@ -102,8 +84,8 @@ const timeChartFunc = (divRef, dimensions, params, windowSize, chartData, update
 }
 };
 
-export const NormalizedChart = props => {
+export const LineChart = props => {
     return (
-        <ChartTemplate chartFunction={timeChartFunc} params={props.params} />
+        <ChartTemplate chartFunction={chartFunc} params={props.params} />
     );
 };

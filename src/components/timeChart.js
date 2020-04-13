@@ -3,7 +3,7 @@ import * as dc from "dc";
 import { ChartTemplate } from "./chartTemplate";
 import { scaleTime, format } from "d3";
 import moment from "moment";
-import { colorf, sortpc, totalReduce, provinceTotalReduce } from "../util";
+import { colorf, sortpc, totalReduce, provinceTotalReduce, accumulateGroup, accumulateGroupTotal } from "../util";
 
 const timeChartFunc = (
     divRef,
@@ -25,58 +25,22 @@ const timeChartFunc = (
         chart.width(chartW).height(chartH);
         return chart;
     } else {
-        let dimension;
-        let pgroup;
-        let group;
-        if (params.normalize) {
-            dimension = dimensions["dateN"];
-            pgroup = dimensions["provN"].group();
-            group = dimension.group();
-        } else {
-            dimension = dimensions["date"];
-            pgroup = dimensions["prov"].group();
-            group = dimension.group();
-        }
+        // let dimension;
+        // let pgroup;
+        // let group;
+        const dimension = dimensions["date"];
+        const pgroup = dimensions["prov"].group();
+        const group = dimension.group();
         const stack = params.stacked;
         let chartGroup = group;
         const colors = colorf();
         if (stack) {
             const pCounts = provinceTotalReduce(group);
-            function accumulate_group(source_group) {
-                return {
-                    all: function() {
-                        const sa = source_group.all();
-                        const cumulate = {};
-                        const res = [];
-                        for (const el of sa) {
-                            for (let [k, v] of Object.entries(el.value)) {
-                                cumulate[k] = (cumulate[k] || 0) + v;
-                            }
-                            res.push({ key: el.key, value: { ...cumulate } });
-                        }
-                        return res;
-                    }
-                };
-            }
-            const ag = accumulate_group(pCounts);
+            const ag = accumulateGroup(pCounts);
             chartGroup = ag;
         } else {
-            function accumulate_group(source_group) {
-                return {
-                    all: function() {
-                        const sa = source_group.all();
-                        let cumulate = 0;
-                        const res = [];
-                        for (const el of sa) {
-                            cumulate += el.value;
-                            res.push({ key: el.key, value: cumulate });
-                        }
-                        return res;
-                    }
-                };
-            }
             const tCount = totalReduce(group);
-            chartGroup = accumulate_group(tCount);
+            chartGroup = accumulateGroupTotal(tCount);
         }
         // const provinces = totalReduce(pgroup).all();
         const provinces = totalReduce(pgroup).top(13);
@@ -111,6 +75,8 @@ const timeChartFunc = (
             .margins({ left: 40, top: 10, right: 10, bottom: 20 })
             // .renderDataPoints({ radius: 0, fillOpacity: 1 })
             .xyTipsOn(true)
+            // .title(x=>{return `${x.key.format("d-MMM")}: ${x.value}`})
+            // .title(x=>{console.log(x.value); return parseInt(x.value)})
             .x(
                 scaleTime().domain([
                     new Date(2020, 2, 1),
