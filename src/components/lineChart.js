@@ -86,6 +86,9 @@ const chartFunc = (divRef, dimensions, params, windowSize, chartData, updateChar
 
 export const LineChart = props => {
     return (
-        <ChartTemplate chartFunction={chartFunc} params={props.params} />
+        <ChartTemplate 
+        chartFunction={chartFunc} 
+        title={props.params.cumulative?"Cumulative":"Daily"}
+        params={props.params} />
     );
 };
