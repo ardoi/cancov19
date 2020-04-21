@@ -109,7 +109,7 @@ export default class DataContext extends Component {
         const urlWorldD = "https://cdn.jsdelivr.net/gh/CSSEGISandData/COVID-19@master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 
         const processJHData = (url, key) =>{
-            const p = csv(url).then(data => {
+            const p = csv(url, {cache:'no-cache'}).then(data => {
             const dd = d3a.cross(data.columns.slice(4), data, (ddate, d) => ({
                     date: ddate,
                     country: d["Country/Region"],
