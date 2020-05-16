@@ -78,27 +78,27 @@ export default class DataContext extends Component {
         const backupUrl = backupUrlBase + url;
         const backupUrl2 = backupUrlBase + url2g;
 
-        const p1 = csv(url)
-            .then(processDetailData)
-            .catch(error => {
-                console.log("failed with url", error);
-                return csv(backupUrl)
-                    .then(processDeathData)
-                    .catch(error => {
-                        console.log("backuperror 1", error);
-                    });
-            });
+        // const p1 = csv(url)
+        //     .then(processDetailData)
+        //     .catch(error => {
+        //         console.log("failed with url", error);
+        //         return csv(backupUrl)
+        //             .then(processDeathData)
+        //             .catch(error => {
+        //                 console.log("backuperror 1", error);
+        //             });
+        //     });
 
-        const p2 = csv(url2g)
-            .then(processDeathData)
-            .catch(error => {
-                console.log("failed with url2", error);
-                return csv(backupUrl2)
-                    .then(processDeathData)
-                    .catch(error => {
-                        console.log("backuperror 2", error);
-                    });
-            });
+        // const p2 = csv(url2g)
+        //     .then(processDeathData)
+        //     .catch(error => {
+        //         console.log("failed with url2", error);
+        //         return csv(backupUrl2)
+        //             .then(processDeathData)
+        //             .catch(error => {
+        //                 console.log("backuperror 2", error);
+        //             });
+        //     });
 
 
 
@@ -171,7 +171,8 @@ export default class DataContext extends Component {
         }
         const p3 = processJHData(urlWorld, 'detailW');
         const p4 = processJHData(urlWorldD, 'deathsW');
-        Promise.all([p1,p2, p3, p4]).then(x => {
+        // Promise.all([p1,p2, p3, p4]).then(x => {
+        Promise.all([p3, p4]).then(x => {
             console.log("Done fetching data");
 
             this.setState({

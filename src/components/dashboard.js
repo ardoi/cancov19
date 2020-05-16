@@ -13,14 +13,14 @@ import {
 
 export const Dashboard = props => {
     const panes = [
-        {
-            menuItem: {content:"Canada", key:"canada", icon:'tree'},
-            pane: (
-                <Tab.Pane attached="top" key={1}>
-                    <CanadaDashboard/>
-                </Tab.Pane>
-            )
-        },
+        // {
+        //     menuItem: {content:"Canada", key:"canada", icon:'tree'},
+        //     pane: (
+        //         <Tab.Pane attached="top" key={1}>
+        //             <CanadaDashboard/>
+        //         </Tab.Pane>
+        //     )
+        // },
         {
             menuItem: {content:"World", key:"world", icon:'globe'},
             pane: (

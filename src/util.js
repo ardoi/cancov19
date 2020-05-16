@@ -140,7 +140,8 @@ export const accumulateGroupTotal = (source_group)=>{
 export const populationW = {};
 const renames = {
     "Czech Republic":"Czechia",
-    "United States":"US"
+    "United States":"US",
+    "Russian Federation":"Russia"
 }
 popData.forEach(x=>{
     const name = renames.hasOwnProperty(x.country)? renames[x.country]:x.country;
