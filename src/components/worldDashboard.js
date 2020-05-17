@@ -158,7 +158,7 @@ export const WorldDashboard = props => {
             menuItem: "Stacked",
             pane: (
                 <Tab.Pane attached="top" key={11}>
-                    <TimeChart params={{ stacked: true, usedata: "deathsW" , loc:LOC}} />
+                    <TimeChart params={{ stacked: true, usedata: "deathW" , loc:LOC}} />
                 </Tab.Pane>
             )
         },
@@ -166,7 +166,7 @@ export const WorldDashboard = props => {
             menuItem: "Lines",
             pane: (
                 <Tab.Pane attached="top" key={12}>
-                    <LineChart params={{ stacked: false, usedata: "deathsW" ,loc:LOC, cumulative:true  }} />
+                    <LineChart params={{ stacked: false, usedata: "deathW" ,loc:LOC, cumulative:true  }} />
                 </Tab.Pane>
             )
         },
@@ -174,7 +174,7 @@ export const WorldDashboard = props => {
             menuItem: "Total",
             pane: (
                 <Tab.Pane attached="top" key={13}>
-                    <TimeChart params={{ stacked: false, usedata: "deathsW" , loc:LOC}} />
+                    <TimeChart params={{ stacked: false, usedata: "deathW" , loc:LOC}} />
                 </Tab.Pane>
             )
         }
@@ -185,7 +185,7 @@ export const WorldDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={14}>
                     <DailyTimeChart
-                        params={{ stacked: true, usedata: "deathsW" , loc:LOC}}
+                        params={{ stacked: true, usedata: "deathW" , loc:LOC}}
                     />
                 </Tab.Pane>
             )
@@ -194,7 +194,7 @@ export const WorldDashboard = props => {
             menuItem: "Lines",
             pane: (
                 <Tab.Pane attached="top" key={15}>
-                    <LineChart params={{ stacked: false, usedata: "deathsW" ,loc:LOC, cumulative:false  }} />
+                    <LineChart params={{ stacked: false, usedata: "deathW" ,loc:LOC, cumulative:false  }} />
                 </Tab.Pane>
             )
         },
@@ -203,7 +203,7 @@ export const WorldDashboard = props => {
             pane: (
                 <Tab.Pane attached="top" key={16}>
                     <DailyTimeChart
-                        params={{ stacked: false, usedata: "deathsW" , loc:LOC}}
+                        params={{ stacked: false, usedata: "deathW" , loc:LOC}}
                     />
                 </Tab.Pane>
             )
@@ -222,7 +222,7 @@ export const WorldDashboard = props => {
                                     <StatisticValue>
                                         <StatNumber
                                             params={{
-                                                usedata: "deathsW",
+                                                usedata: "deathW",
                                                 total: true,
                                                 loc:LOC
                                             }}
@@ -238,7 +238,7 @@ export const WorldDashboard = props => {
                                     <StatisticValue>
                                         <StatNumber
                                             params={{
-                                                usedata: "deathsW",
+                                                usedata: "deathW",
                                                 total: false,
                                                 // date: true
                                                 loc:LOC
@@ -249,7 +249,7 @@ export const WorldDashboard = props => {
                                     <StatisticLabel>
                                         On{" "}
                                         <LastDateDisplay
-                                            params={{ usedata: "deathsW" }}
+                                            params={{ usedata: "deathW" }}
                                         />
                                     </StatisticLabel>
                                 </Statistic>
@@ -257,7 +257,7 @@ export const WorldDashboard = props => {
                         </GridRow>
                         <Grid.Column width={16}>
                             <Segment>
-                                <ProvinceChart params={{ usedata: "deathsW", loc:LOC }} />
+                                <ProvinceChart params={{ usedata: "deathW", loc:LOC }} />
                             </Segment>
                         </Grid.Column>
                     </Grid>
@@ -320,14 +320,14 @@ export const WorldDashboard = props => {
                 <Grid.Column width={4}>
                     <Segment>
                         <ProvinceChart
-                            params={{ usedata: "deathsW", normalize: true , loc:LOC}}
+                            params={{ usedata: "deathW", normalize: true , loc:LOC}}
                         />
                     </Segment>
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <Segment>
                         <NormalizedChart
-                            params={{ usedata: "deathsW", normalize: true, loc:LOC}}
+                            params={{ usedata: "deathW", normalize: true, loc:LOC}}
                         />
                     </Segment>
                 </Grid.Column>

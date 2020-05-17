@@ -110,67 +110,127 @@ export default class DataContext extends Component {
 
         const processJHData = (url, key) =>{
             const p = csv(url, {cache:'no-cache'}).then(data => {
-            const dd = d3a.cross(data.columns.slice(4), data, (ddate, d) => ({
-                    date: ddate,
-                    country: d["Country/Region"],
-                    region: d["Province/State"] ? d["Province/State"] : null,
-                    value: parseFloat(d[ddate]),
-                    lat: parseFloat(d.Lat),
-                    lon: parseFloat(d.Long)
-                }));
-            const q = Array.from(
-                d3a.rollups(
-                    dd,
-                    d => d3a.sum(d, v => +v.value),
-                    d => d.country,
-                    d => d.date
-                )
-            );
-            const totals=q.map(x=>{
-                return {country: x[0], total:parseInt(x[1][x[1].length-1][1]) }
-            })
-            totals.sort((a,b)=>-a.total+b.total);
-            const keepAmount = 13; //Number of countries for which to keep data
-            const keep = totals.slice(0,keepAmount-3).map(x=>x.country);
-            const must_have = ['Canada','Pakistan','Estonia'];
-            must_have.forEach(x=>{
-                keep.push(x);
-            });
-            const out = [];
-            q.forEach(x => {
-                const country = x[0];
-                if(keep.includes(country)){
-                for (let i = 0; i < x[1].length; i++) {
-                    const total = i === 0 ? x[1][i][1] : x[1][i][1] - x[1][i - 1][1];
-                    if(i>0 && total==0){
-                        continue
+                const dd = d3a.cross(data.columns.slice(4), data, (ddate, d) => ({
+                        date: ddate,
+                        country: d["Country/Region"],
+                        region: d["Province/State"] ? d["Province/State"] : null,
+                        value: parseFloat(d[ddate]),
+                        lat: parseFloat(d.Lat),
+                        lon: parseFloat(d.Long)
+                    }));
+                //World:
+                const q = Array.from(
+                    d3a.rollups(
+                        dd,
+                        d => d3a.sum(d, v => +v.value),
+                        d => d.country,
+                        d => d.date
+                    )
+                );
+                const totals=q.map(x=>{
+                    return {country: x[0], total:parseInt(x[1][x[1].length-1][1]) }
+                })
+                totals.sort((a,b)=>-a.total+b.total);
+                const keepAmount = 13; //Number of countries for which to keep data
+                const keep = totals.slice(0,keepAmount-3).map(x=>x.country);
+                const must_have = ['Canada','Pakistan','Estonia'];
+                must_have.forEach(x=>{
+                    keep.push(x);
+                });
+                const out = [];
+                q.forEach(x => {
+                    const country = x[0];
+                    if(keep.includes(country)){
+                    for (let i = 0; i < x[1].length; i++) {
+                        const total = i === 0 ? x[1][i][1] : x[1][i][1] - x[1][i - 1][1];
+                        if(i>0 && total==0){
+                            continue
+                        }
+                        out.push({
+                            Prov: country,
+                            Date: moment(x[1][i][0],"M/DD/YY"),
+                            Total: total
+                        });
                     }
-                    out.push({
-                        Prov:country,
-                        Date: moment(x[1][i][0],"M/DD/YY"),
-                        Total: total
-                    });
                 }
-            }
+                });
+                const cfw = crossfilter(out);
+                const clonedData = JSON.parse(JSON.stringify(out));
+                clonedData.forEach(x => {
+                    x.Date = moment(x.Date);
+                });
+                const cfwn = crossfilter(clonedData);
+                this.dims[key+"W"] = {
+                    date: cfw.dimension(d => d.Date), 
+                    prov: cfw.dimension(d => d.Prov),
+                    dateN: cfwn.dimension(d => d.Date), 
+                    provN: cfwn.dimension(d => d.Prov)
+                };
+                //Canada
+                const ddc = dd.filter(x=>x.country==="Canada").filter(x=>x.region.indexOf("Princess")===-1);
+                // console.log('ddc',ddc)
+                const provinceCodes={
+                    'Ontario':'ON',
+                    'Quebec':'QC',
+                    'Alberta':'AB',
+                    'British Columbia':'BC',
+                    'Nova Scotia':'NS',
+                    'Saskatchewan':'SK',
+                    'Manitoba':'MB',
+                    'Newfoundland and Labrador':'NL',
+                    'New Brunswick':'NB',
+                    'Prince Edward Island':'PE',
+                    'Yukon':'YT',
+                    'Northwest Territories':'NT'
+                };
+                const qc = Array.from(
+                    d3a.rollups(
+                        ddc,
+                        d => d3a.sum(d, v => +v.value),
+                        d => provinceCodes[d.region],
+                        d => d.date
+                    )
+                );
+                // console.log(qc)
+                const totalsc=qc.map(x=>{
+                    return {province: x[0], total:parseInt(x[1][x[1].length-1][1]) }
+                })
+                totalsc.sort((a,b)=>-a.total+b.total);
+                const outc = [];
+                qc.forEach(x => {
+                    const country = x[0];
+                    // if(keep.includes(country)){
+                    for (let i = 0; i < x[1].length; i++) {
+                        const total = i === 0 ? x[1][i][1] : x[1][i][1] - x[1][i - 1][1];
+                        if(i>0 && total==0){
+                            continue
+                        }
+                        outc.push({
+                            Prov: country,
+                            Date: moment(x[1][i][0],"M/DD/YY"),
+                            Total: total
+                        });
+                    }
+                // }
+                });
+                const cfwc = crossfilter(outc);
+                const clonedDatac = JSON.parse(JSON.stringify(outc));
+                clonedDatac.forEach(x => {
+                    x.Date = moment(x.Date);
+                });
+                const cfwcn = crossfilter(clonedDatac);
+                this.dims[key+"C"] = {
+                    date: cfwc.dimension(d => d.Date), 
+                    prov: cfwc.dimension(d => d.Prov),
+                    dateN: cfwcn.dimension(d => d.Date), 
+                    provN: cfwcn.dimension(d => d.Prov)
+                };
+                return [out,outc];
             });
-            const cfw = crossfilter(out);
-            const clonedData = JSON.parse(JSON.stringify(out));
-            clonedData.forEach(x => {
-                x.Date = moment(x.Date);
-            });
-            const cfwn = crossfilter(clonedData);
-            this.dims[key] = {
-                date: cfw.dimension(d => d.Date), 
-                prov: cfw.dimension(d => d.Prov),
-                dateN: cfwn.dimension(d => d.Date), 
-                provN: cfwn.dimension(d => d.Prov)
-            };
-            return out;
-        });
         return p;
         }
-        const p3 = processJHData(urlWorld, 'detailW');
-        const p4 = processJHData(urlWorldD, 'deathsW');
+        const p3 = processJHData(urlWorld, 'detail');
+        const p4 = processJHData(urlWorldD, 'death');
         // Promise.all([p1,p2, p3, p4]).then(x => {
         Promise.all([p3, p4]).then(x => {
             console.log("Done fetching data");
@@ -178,10 +238,10 @@ export default class DataContext extends Component {
             this.setState({
                 loading: false,
                 hasCF: true,
-                detailData: x[0],
-                deathData: x[1],
-                worldDetailData: x[2],
-                worldDeathData: x[3]
+                detailData: x[0][1],
+                deathData: x[1][1],
+                worldDetailData: x[0][0],
+                worldDeathData: x[1][0]
             });
         });
     }

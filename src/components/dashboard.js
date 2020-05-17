@@ -13,14 +13,14 @@ import {
 
 export const Dashboard = props => {
     const panes = [
-        // {
-        //     menuItem: {content:"Canada", key:"canada", icon:'tree'},
-        //     pane: (
-        //         <Tab.Pane attached="top" key={1}>
-        //             <CanadaDashboard/>
-        //         </Tab.Pane>
-        //     )
-        // },
+        {
+            menuItem: {content:"Canada", key:"canada", icon:'tree'},
+            pane: (
+                <Tab.Pane attached="top" key={1}>
+                    <CanadaDashboard/>
+                </Tab.Pane>
+            )
+        },
         {
             menuItem: {content:"World", key:"world", icon:'globe'},
             pane: (
@@ -47,9 +47,7 @@ export const Dashboard = props => {
                     />
                 </Segment>
                 <Segment color="orange">
-                    Data sources:{" "}
-                    <a href="https://virihealth.com/" target="_blank">ViriHealth</a> 
-                    {" "} and
+                    Data source:{" "}
                     <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank"> John Hopkins University CSSE</a>
                 </Segment>
             </DataContext>
