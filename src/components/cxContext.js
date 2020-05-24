@@ -141,8 +141,15 @@ export default class DataContext extends Component {
                 q.forEach(x => {
                     const country = x[0];
                     if(keep.includes(country)){
-                    for (let i = 0; i < x[1].length; i++) {
-                        const total = i === 0 ? x[1][i][1] : x[1][i][1] - x[1][i - 1][1];
+                    for (let i = 7; i < x[1].length; i++) {
+                        // if (i<7){
+                        //     continue
+                        // }
+                        // const total = i === 0 ? x[1][i][1] : Math.max(x[1][i][1] - x[1][i - 1][1],0);
+                        let total = 0;
+                        for(let j=0; j<7; j++){
+                            total += Math.max(x[1][i-j][1] - x[1][i - 1 - j][1],0)/7
+                        }
                         if(i>0 && total==0){
                             continue
                         }
@@ -200,8 +207,12 @@ export default class DataContext extends Component {
                 qc.forEach(x => {
                     const country = x[0];
                     // if(keep.includes(country)){
-                    for (let i = 0; i < x[1].length; i++) {
-                        const total = i === 0 ? x[1][i][1] : x[1][i][1] - x[1][i - 1][1];
+                    for (let i = 7; i < x[1].length; i++) {
+                        // const total = i === 0 ? x[1][i][1] : x[1][i][1] - x[1][i - 1][1];
+                        let total = 0;
+                        for(let j=0; j<7; j++){
+                            total += Math.max(x[1][i-j][1] - x[1][i - 1 - j][1],0)/7
+                        }
                         if(i>0 && total==0){
                             continue
                         }
