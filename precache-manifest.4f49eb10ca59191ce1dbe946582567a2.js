@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f19ad5cf893efac0cd3fd2c10424d52b",
+    "revision": "65c14e4dddde4d8b59ffebf7bcfea39e",
     "url": "/cancov19/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cancov19/static/css/2.19499655.chunk.css"
   },
   {
-    "revision": "66c8e0d91a7bd1d18066",
+    "revision": "9545e7d080bc59ec1519",
     "url": "/cancov19/static/css/main.9be7533d.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cancov19/static/js/2.4da64c21.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "66c8e0d91a7bd1d18066",
-    "url": "/cancov19/static/js/main.3d9b6572.chunk.js"
+    "revision": "9545e7d080bc59ec1519",
+    "url": "/cancov19/static/js/main.e3153c94.chunk.js"
   },
   {
     "revision": "8b1d230d21b3766d68ea",
